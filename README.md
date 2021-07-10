@@ -72,7 +72,6 @@ Make sure to test the connection and authentication.
 
 The example is taken directly from : 
 
-
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/html/red_hat_single_sign-on_for_openshift_on_openjdk/tutorials#binary-builds
 
 Create the project: 
@@ -115,8 +114,7 @@ add eap-mgmt-user, set password , add all roles for realm-management
 
 add eap-user, set password,add eap-user-role
 
-From *eap-demo* realm, copy the public key: 
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6BNZ7fmJonIJOlE9iPAL/84bxnFzQ3MQcHrD/mnhjlkc9I/ALvV64tmTB94GbFDF6YOc0kgwoSR+QxDhSa5kDZa8Bcjas+WI4mVRB14qK/dNy0qA0qjmY++Hx+p42W9B6F70Gg49baNCZs9R8cTx2JVQirxeLkTpUUi8CFSM7RM9MYFSI6taOgoJIS9/djcV4tFmdyQyriO6zeJuBqVMNFbXZWyunBqhvNmnzgc8N/u0v3BS0Ydwjs7fGIR/ofFKjDBBFHRjuZuoyPZ8pSONSwZcncfy6jwPK41F72rqCx0V4ZlZ+l+lduKX1LGsGKa4IRVxwSF9zPZ0B368KVZR4QIDAQAB
+From *eap-demo* realm, copy the public key
 
 
 now deploy eap73-sso-s2i:
@@ -130,7 +128,7 @@ oc new-app --template eap73-sso-s2i \
  -p SSO_REALM=eap-demo \
  -p SSO_USERNAME=eap-mgmt-user \
  -p SSO_PASSWORD="RedHat123" \
- -p SSO_PUBLIC_KEY='MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6BNZ7fmJonIJOlE9iPAL/84bxnFzQ3MQcHrD/mnhjlkc9I/ALvV64tmTB94GbFDF6YOc0kgwoSR+QxDhSa5kDZa8Bcjas+WI4mVRB14qK/dNy0qA0qjmY++Hx+p42W9B6F70Gg49baNCZs9R8cTx2JVQirxeLkTpUUi8CFSM7RM9MYFSI6taOgoJIS9/djcV4tFmdyQyriO6zeJuBqVMNFbXZWyunBqhvNmnzgc8N/u0v3BS0Ydwjs7fGIR/ofFKjDBBFHRjuZuoyPZ8pSONSwZcncfy6jwPK41F72rqCx0V4ZlZ+l+lduKX1LGsGKa4IRVxwSF9zPZ0B368KVZR4QIDAQAB' \
+ -p SSO_PUBLIC_KEY='$EAP-DEMO-PUBLIC-KEY-GOES-HERE' \
  -p SSO_TRUSTSTORE=eapkeystore.jks \
  -p SSO_TRUSTSTORE_PASSWORD=changeit \
  -p SSO_TRUSTSTORE_SECRET=eap-ssl-secret \
