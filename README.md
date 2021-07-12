@@ -1,7 +1,6 @@
 
 ## Setting up the service account token for pulling images from registry.redhat.io
-Needed for RH sso
-Registry.redhat.io service account:
+This is needed to pull images from registry.redhat.io: 
 
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.4/html/red_hat_single_sign-on_for_openshift_on_openjdk/get_started#image-streams-applications-templates
 
@@ -33,10 +32,21 @@ do
 done
 ```
 
-or run `oc create` in the example above
+or run `oc create` and install into a custom namespace (We will have to instantiate templates from this project):
+```shell
+for resource in sso74-image-stream.json \
+  sso74-https.json \
+  sso74-postgresql.json \
+  sso74-postgresql-persistent.json \
+  sso74-x509-https.json \
+  sso74-x509-postgresql-persistent.json
+do
+  oc create -n $CUSTOMPROJECT  -f \
+  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso74-dev/templates/${resource}
+done
+```
 
-
-# Installing ephemeral version of Red Hat SSO; 
+# Installing an ephemeral instance of Red Hat SSO; 
 
 
 `oc new-project sso-app-demo`
@@ -51,7 +61,6 @@ When the installation is complete and the pods are ready:
 Log into RH SSO
 
 Create a new realm, call it 'eap-demo'
-
 
 Add a new User Federation -> LDAP
 
